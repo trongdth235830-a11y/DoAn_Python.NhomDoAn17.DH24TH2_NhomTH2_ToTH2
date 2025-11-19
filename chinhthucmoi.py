@@ -573,11 +573,15 @@ def tuyenthamquan(parent):
     def them_thamquan(): 
         madiem = entry_madiem.get() 
         matuyen = cbb_matuyen.get()
+       # nếu chưa có mã tuyến -> thông báo riêng
+        if not matuyen:
+            messagebox.showwarning("Thiếu mã tuyến", "Chưa có mã tuyến, hãy kiểm tra lại thông tin")
+            return
         tendiem = entry_tendiem.get() 
         diachi = entry_diachi.get()
         phithamquan = entry_phithamquan.get()
 
-        if not (madiem and matuyen and tendiem and diachi and phithamquan): 
+        if not (madiem and tendiem and diachi and phithamquan): 
             messagebox.showwarning("Thiếu thông tin", "Vui lòng điền đầy đủ thông tin.") 
             return
         conn = connect_db() 
@@ -775,13 +779,17 @@ def qlphuongtien(parent):
     def them_phuongtien(): 
         maphuongtien = entry_maphuongtien.get() 
         matuyen = cbb_matuyen.get() 
+        # nếu chưa có mã tuyến -> thông báo riêng
+        if not matuyen:
+            messagebox.showwarning("Thiếu mã tuyến", "Chưa có mã tuyến, hãy kiểm tra lại thông tin")
+            return
         tenphuongtien = entry_tenphuongtien.get() 
         loaiphuongtien = entry_loaiphuongtien.get() 
         succhua = entry_succhua.get() 
         
-        if not (maphuongtien and matuyen and tenphuongtien and loaiphuongtien and succhua):
+        if not (maphuongtien and tenphuongtien and loaiphuongtien and succhua):
             messagebox.showwarning("Thiếu thông tin", "Vui lòng điền đầy đủ thông tin.")
-            return
+        return
         
         conn = connect_db() 
         cursor = conn.cursor() 
